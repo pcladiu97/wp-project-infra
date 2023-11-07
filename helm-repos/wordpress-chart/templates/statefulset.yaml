@@ -1,0 +1,47 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: {{ .Chart.Name }}
+spec:
+  selector:
+    matchLabels:
+      helm.sh/chart: {{ .Chart.Name }}
+      app.kubernetes.io/managed-by: {{ .Release.Service }}
+  template:
+    metadata:
+      labels:
+        helm.sh/chart: {{ .Chart.Name }}
+        app.kubernetes.io/managed-by: {{ .Release.Service }}
+    spec:
+      imagePullSecrets:
+        - name: registry-sa
+      containers:
+        - name: {{ .Chart.Name }}
+          image: {{ .Values.image.repository }}
+          ports:
+          - containerPort: {{ .Values.ports.containerPort}}
+          env:
+          {{- range $varName, $varValue := .Values.env }}
+            - name: {{ $varName }}
+              value: {{ $varValue | quote }}
+          {{- end }}
+          {{- range $secretName, $secretData := .Values.envFromSecrets }}
+          {{- range $secretEnvName, $secretEnvValue := $secretData }}
+            - name: {{ $secretEnvName }}
+              valueFrom:
+                secretKeyRef:
+                  name: {{ $secretName }}
+                  key: {{ $secretEnvValue }}
+          {{- end }}
+          {{- end }}
+          {{- range $configMapName, $configMapData := .Values.envFromConfigMap }}
+          {{- range $configMapEnvName, $configMapEnvValue := $configMapData }}
+            - name: {{ $configMapEnvName }}
+              valueFrom:
+                secretKeyRef:
+                  name: {{ $configMapName }}
+                  key: {{ $configMapEnvValue }}
+          {{- end }}
+          {{- end }}
+          volumeMounts: {{ toYaml .Values.volumeMounts | default "" | nindent 12 }}
+      volumes: {{ toYaml .Values.volumes | default "" | nindent 6 }}

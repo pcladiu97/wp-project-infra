@@ -1,0 +1,82 @@
+---
+# Source: wordpress/templates/storage.yaml
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: wordpress-pv
+spec:
+  storageClassName: ""
+  claimRef:
+    name: wordpress-pvc
+    namespace: wp
+---
+# Source: wordpress/templates/storage.yaml
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: wordpress-pvc
+  namespace: wp
+spec:
+  storageClassName: "" # Empty string must be explicitly set otherwise default StorageClass will be set
+  volumeName: wordpress-pvc
+---
+# Source: wordpress/templates/service.yaml
+apiVersion: v1
+kind: Service
+metadata:
+  name: wordpress
+spec:
+  type: LoadBalancer
+  selector:
+    app: wordpress
+  ports:
+    - name: http
+      port: 80 
+      targetPort: 9000
+---
+# Source: wordpress/templates/statefulset.yaml
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: wordpress
+spec:
+  selector:
+    matchLabels:
+      helm.sh/chart: wordpress
+      app.kubernetes.io/managed-by: Helm
+  template:
+    metadata:
+      labels:
+        helm.sh/chart: wordpress
+        app.kubernetes.io/managed-by: Helm
+    spec:
+      containers:
+        - name: wordpress
+          image: europe-west1-docker.pkg.dev/wp-project-manage/wp-project-infra-registry/wp-image
+          ports:
+          - containerPort: 9000
+          env:
+            - name: WORDPRESS_DB_HOST
+              value: "mysql"
+            - name: WORDPRESS_DB_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: mysql
+                  key: password
+            - name: WORDPRESS_DB_USER
+              valueFrom:
+                secretKeyRef:
+                  name: mysql
+                  key: username
+            - name: WORDPRESS_DB_NAME
+              valueFrom:
+                secretKeyRef:
+                  name: wordpress
+                  key: database_name
+          volumeMounts: 
+            - mountPath: /var/www/html/wp-content
+              name: wordpress-content
+      volumes: 
+      - name: wordpress-content
+        persistentVolumeClaim:
+          claimName: wordpress-pvc

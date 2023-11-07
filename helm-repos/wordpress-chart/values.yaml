@@ -1,0 +1,35 @@
+replicas: 1
+
+image:
+  repository: europe-west1-docker.pkg.dev/wp-project-manage/wp-project-infra-registry/wp-image:latest
+
+ports:
+  containerPort: 9000
+
+env:
+  WORDPRESS_DB_HOST: "mysql"
+
+envFromSecrets:
+  mysql:
+    WORDPRESS_DB_USER: username
+    WORDPRESS_DB_PASSWORD: password
+
+envFromConfigMap:
+  wordpress:
+    WORDPRESS_DB_NAME: database_name
+
+volumeMounts:
+  - name: wordpress-content
+    mountPath: /var/www/html/wp-content
+
+volumes:
+  - name: wordpress-content
+    persistentVolumeClaim:
+      claimName: wordpress-pvc
+
+service:
+  type: LoadBalancer
+  ports:
+    - name: http
+      port: 80
+      targetPort: 9000
