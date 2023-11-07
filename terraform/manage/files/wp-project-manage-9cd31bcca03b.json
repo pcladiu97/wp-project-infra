@@ -1,0 +1,13 @@
+{
+  "type": "service_account",
+  "project_id": "wp-project-manage",
+  "private_key_id": "9cd31bcca03bb9829ed5bed532a13b4eaa665227",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvAIBADANBgkqhkiG9w0BAQEFAASCBKYwggSiAgEAAoIBAQCrYgSWUIn19DEO\nP0QU/nf0I7siQbkGCMiYW9vNih52VGyJvCdUalGyGR48fjoT7w/tVMmlHNj6L+hl\n+p+YDEZLfAyV7KrvXa2DGbnhbobDfMrHPw7I6RSbjhsXYtDbdlo2Aqopsy7jMUCq\n/nB+Ryae+g5sgwrO5hYT7aH4HWO9H9LgNxhOyd9xPFfVekMxNDkMZ97fxGWHSZVM\nTcujkP40NM5i65OCNRUEfvNhr0lKOU48lLAbX4ybxGhCd1ncOsc/Hcv6i9wP0VSK\n2e6CeWK8O/CdtXi/Rl/DH7dOGoqigz3NNMcHjbZe2S8g3ZRYWdTpmIxHpILzX1lI\nJNfa39pjAgMBAAECggEABgtxfPm/O/EOb+G0XYcyJObDuWwXAgr6REFtKb024NaO\nc3cy7evIEN+I7PpIwx458hV8/Tlcv8pDyKED0wGP0ya/bORJjSLBNXAJWdWjpC55\nGnjzZQuvgeMLupHuKudsPB5w8QKUY0f/72gFALcyugW4z4P5tB1yZuaJQW6L74Yq\ni3MrtYnQLOHis2S35xNUxtJDnmkSAcTEs1GX0kBrQeCmAgEnofguiAOOp9F4bbZz\ni9/FX/8qFilsZJhZ7yJe1aXYnjrSr2mDjiI1kh1sahzDq+TyaapkfQL1sFb3O4TN\nURqpEUdkh5Q0npWx3joWryxeKlQod6GWNFKMEaZwPQKBgQDUaBNOmJ5YrO48Xruc\nV/UigOTt2s9X3E4qVk5KdDvC9u05outFqdiAzn0Vl0bM5DJUfveRTRKF8zPhLwbt\nD2s1LQTloaxa/ldeZQAoXYGUofi8vXL0OGg5N7/v89c2gXnxxDDEMAmHtFbbm5km\nfaCpDa31CQomKh3R4OAIA2kZnwKBgQDOjor9aLKQKLGbhBlhCw7tjOQv6AfHhnWU\nQuHAqYUE8FGBhJDDVnjDz+Kr2x4W7kOHBbuMld582T0EACQ5sLOqNlkbDlgtJg3R\nMjm3fUrPNMR494Ec9mpJ1ED3xdcP2l+lMyimibfsjRQprhl2jpZLcwegFTOp8oEs\nYF/Y2JIQvQKBgGSNdH5jr6qJCysXKbekyA5yeG3FhRyx1WsjemKyzcvJO5pqbviG\npFCt7/c1qzW53b20cZyeoOM6s9epfJzjDLyauFPBCqf0+gVcyQtS4NItL2SiRvYo\nceaMZtfAVqSd/M2gM/ncR9avX+MMsR7QoCsHp891XRGeJInD7Cq++pU/AoGAIrd0\nhuj88hvU1iWaumPIa4a9p4uhGxjvVC71kJMtZ0oY+OLWDe7Pt2GOYIIgiYwcT2pY\nPmXGEkfU6II5lHStjdM6oMCFc3ks41dEuiFV3IOq7gXzbnHAJY6GKN7YqbJzVunF\nUFBfWGPR2ruHThTjD+VSh8Zoe4zlxxafpWupCSUCgYA2NqMpwDEK/ZHrMxoRbA57\nyjt1cScu/sV4gbbpsMtUpvLWcPdqRY/xLP/8OmqDROr5fIth+S5OjUttyMcV05Fs\nOywnhJyIDq822AoprFNoQuk6vQxAxM+YGdn0ufvoSgr9G+iG8LcLfhk1k7RG6to8\n/PVNAWm6cpmVt40l3Y1TfQ==\n-----END PRIVATE KEY-----\n",
+  "client_email": "terraform-sa@wp-project-manage.iam.gserviceaccount.com",
+  "client_id": "100182751255623333012",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://oauth2.googleapis.com/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/terraform-sa%40wp-project-manage.iam.gserviceaccount.com",
+  "universe_domain": "googleapis.com"
+}
