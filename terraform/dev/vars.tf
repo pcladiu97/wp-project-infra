@@ -21,3 +21,7 @@ variable project_region {
 variable "gke_nodes_number" {
     default = 1
 }
+
+variable "wp_namespace" {
+    default = "wp"
+}

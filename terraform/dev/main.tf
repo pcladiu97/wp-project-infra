@@ -13,3 +13,7 @@ provider "google" {
   project     = var.project_id
   zone        = var.project_zone
 }
+
+provider "kubernetes" {
+  config_path    = "~/.kube/config"
+}
