@@ -13,9 +13,12 @@ spec:
         helm.sh/chart: {{ .Chart.Name }}
         app.kubernetes.io/managed-by: {{ .Release.Service }}
     spec:
+      imagePullSecrets:
+      - name: registry-sa
       containers:
         - name: {{ .Chart.Name }}
           image: {{ .Values.image.repository }}
+          imagePullPolicy: Always
           ports:
           - containerPort: {{ .Values.ports.containerPort}}
           env:

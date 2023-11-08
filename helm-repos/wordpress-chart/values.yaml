@@ -7,16 +7,13 @@ ports:
   containerPort: 9000
 
 env:
-  WORDPRESS_DB_HOST: "mysql"
 
 envFromSecrets:
   mysql:
-    WORDPRESS_DB_USER: username
-    WORDPRESS_DB_PASSWORD: password
-
-envFromConfigMap:
-  wordpress:
-    WORDPRESS_DB_NAME: database_name
+    WORDPRESS_DB_HOST: db_host
+    WORDPRESS_DB_NAME: db_name
+    WORDPRESS_DB_USER: db_username
+    WORDPRESS_DB_PASSWORD: db_password
 
 volumeMounts:
   - name: wordpress-content
