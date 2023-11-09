@@ -1,7 +1,9 @@
 replicas: 1
 
+stage: dev
+
 image:
-  repository: europe-west1-docker.pkg.dev/wp-project-manage/wp-project-infra-registry/wp-image:latest
+  repository: europe-west1-docker.pkg.dev/wp-project-manage/wp-project-infra-registry/wp-image
 
 ports:
   containerPort: 9000

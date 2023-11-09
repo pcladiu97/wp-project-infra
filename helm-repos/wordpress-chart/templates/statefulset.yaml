@@ -17,7 +17,7 @@ spec:
       - name: registry-sa
       containers:
         - name: {{ .Chart.Name }}
-          image: {{ .Values.image.repository }}
+          image: {{ .Values.image.repository }}:{{ .Values.stage }}
           imagePullPolicy: Always
           ports:
           - containerPort: {{ .Values.ports.containerPort}}
