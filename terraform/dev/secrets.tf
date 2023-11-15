@@ -1,7 +1,6 @@
 // Get secret value for SA account
 data "google_secret_manager_secret_version" "registry_sa_secret_data" {
  secret   = "projects/440219679769/secrets/registry-sa"
- version  = 1
 }
 
 // Get secret values from GCP for mysql secret
