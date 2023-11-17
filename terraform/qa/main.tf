@@ -1,31 +1,3 @@
-terraform {
-  required_providers {
-    google = {
-      source  = "hashicorp/google"
-      version = ">= 5.4.0"
-    }
-  }
-  required_version = ">= 1.6.3"
-}
-
-terraform {
-  backend "gcs" {
-    bucket      = "wp-project-qa-tf-state-bucket"
-    prefix      = "terraform/infrastructure-state"
-    credentials = "files/wp-project-qa-fff4e8beed43.json"
-  }
-}
-
-provider "google" {
-    credentials = file("files/wp-project-qa-fff4e8beed43.json")
-    project     = var.project_id
-    zone        = var.project_zone
-}
-
-provider "kubernetes" {
-    config_path    = "~/.kube/config"
-}
-
 // Get secret for registry-sa secret
 data "google_secret_manager_secret_version" "registry_sa_secret_data" {
  secret   = "projects/284298684649/secrets/registry-sa"
@@ -46,20 +18,20 @@ data "google_secret_manager_secret_version" "mysql_db_password" {
 }
 
 module "main_bucket" {
-    source = "../cloud-run/bucket"
+    source = "../tf-modules/bucket"
 
-    project_region        = var.project_region
-    tf_state_bucket_name  = "${var.project_id}-tf-state-bucket"
+    project_region        = local.project_region
+    tf_state_bucket_name  = "${local.project_id}-tf-state-bucket"
 }
 
 module "main_kubernetes" {
-    source = "../cloud-run/kubernetes"
+    source = "../tf-modules/kubernetes"
 
-    project_id        = var.project_id
-    project_region    = var.project_region
-    project_zone      = var.project_zone
-    environment       = var.environment
-    gke_nodes_number  = var.gke_nodes_number
+    project_id        = local.project_id
+    project_region    = local.project_region
+    project_zone      = local.project_zone
+    environment       = local.environment
+    gke_nodes_number  = local.gke_nodes_number
 
     network     = module.main_vpc.network
     subnetwork  = module.main_vpc.subnetwork
@@ -73,17 +45,17 @@ module "main_kubernetes" {
 }
 
 module "main_vpc" {
-    source = "../cloud-run/vpc"
+    source = "../tf-modules/vpc"
 
-    project_id        = var.project_id
-    project_region    = var.project_region
+    project_id        = local.project_id
+    project_region    = local.project_region
 }
 
 module "main_sql" {
-    source = "../cloud-run/sql"
+    source = "../tf-modules/sql"
     
-    project_id      = var.project_id
-    project_region  = var.project_region
+    project_id      = local.project_id
+    project_region  = local.project_region
 
     wp_mysql_db_name        = data.google_secret_manager_secret_version.mysql_db_name.secret_data
     wp_mysql_db_user        = data.google_secret_manager_secret_version.mysql_db_username.secret_data
