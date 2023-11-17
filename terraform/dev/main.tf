@@ -9,11 +9,68 @@ terraform {
 }
 
 provider "google" {
-  credentials = file("files/wp-project-404313-88863e84d905.json")
-  project     = var.project_id
-  zone        = var.project_zone
+    credentials = file("files/wp-project-404313-88863e84d905.json")
+    project     = var.project_id
+    zone        = var.project_zone
 }
 
 provider "kubernetes" {
-  config_path    = "~/.kube/config"
+    config_path    = "~/.kube/config"
+}
+
+// Get secret for registry-sa secret
+data "google_secret_manager_secret_version" "registry_sa_secret_data" {
+ secret   = "projects/440219679769/secrets/registry-sa"
+}
+
+// Get secret values from GCP for mysql secret
+data "google_secret_manager_secret_version" "mysql_db_host" {
+ secret   = "projects/440219679769/secrets/mysql_db_host"
+}
+data "google_secret_manager_secret_version" "mysql_db_name" {
+ secret   = "projects/440219679769/secrets/mysql_db_name"
+}
+data "google_secret_manager_secret_version" "mysql_db_username" {
+ secret   = "projects/440219679769/secrets/mysql_db_password"
+}
+data "google_secret_manager_secret_version" "mysql_db_password" {
+ secret   = "projects/440219679769/secrets/mysql_db_username"
+}
+
+module "main_kubernetes" {
+    source = "../cloud-run/kubernetes"
+
+    project_id        = var.project_id
+    project_region    = var.project_region
+    project_zone      = var.project_zone
+    environment       = var.environment
+    gke_nodes_number  = var.gke_nodes_number
+
+    network     = module.main_vpc.network
+    subnetwork  = module.main_vpc.subnetwork
+    
+    wp_mysql_db_host        = data.google_secret_manager_secret_version.mysql_db_host.secret_data
+    wp_mysql_db_name        = data.google_secret_manager_secret_version.mysql_db_name.secret_data
+    wp_mysql_db_user        = data.google_secret_manager_secret_version.mysql_db_username.secret_data
+    wp_mysql_db_password    = data.google_secret_manager_secret_version.mysql_db_password.secret_data
+
+    registry_sa_secret_data = data.google_secret_manager_secret_version.registry_sa_secret_data.secret_data
+}
+
+module "main_vpc" {
+    source = "../cloud-run/vpc"
+
+    project_id        = var.project_id
+    project_region    = var.project_region
+}
+
+module "main_sql" {
+    source = "../cloud-run/sql"
+    
+    project_id      = var.project_id
+    project_region  = var.project_region
+
+    wp_mysql_db_name        = data.google_secret_manager_secret_version.mysql_db_name.secret_data
+    wp_mysql_db_user        = data.google_secret_manager_secret_version.mysql_db_username.secret_data
+    wp_mysql_db_password    = data.google_secret_manager_secret_version.mysql_db_password.secret_data
 }
