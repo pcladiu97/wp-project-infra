@@ -8,6 +8,14 @@ terraform {
   required_version = ">= 1.6.3"
 }
 
+terraform {
+  backend "gcs" {
+    bucket      = "wp-project-qa-tf-state-bucket"
+    prefix      = "terraform/infrastructure-state"
+    credentials = "files/wp-project-qa-fff4e8beed43.json"
+  }
+}
+
 provider "google" {
     credentials = file("files/wp-project-qa-fff4e8beed43.json")
     project     = var.project_id
@@ -35,6 +43,13 @@ data "google_secret_manager_secret_version" "mysql_db_username" {
 }
 data "google_secret_manager_secret_version" "mysql_db_password" {
  secret   = "projects/284298684649/secrets/mysql_db_username"
+}
+
+module "main_bucket" {
+    source = "../cloud-run/bucket"
+
+    project_region        = var.project_region
+    tf_state_bucket_name  = "${var.project_id}-tf-state-bucket"
 }
 
 module "main_kubernetes" {
