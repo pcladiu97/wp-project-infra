@@ -1,1 +1,0 @@
-{"Modules":[{"Key":"","Source":"","Dir":"."},{"Key":"main_kubernetes","Source":"../cloud-run/kubernetes","Dir":"../cloud-run/kubernetes"},{"Key":"main_sql","Source":"../cloud-run/sql","Dir":"../cloud-run/sql"},{"Key":"main_vpc","Source":"../cloud-run/vpc","Dir":"../cloud-run/vpc"}]}
