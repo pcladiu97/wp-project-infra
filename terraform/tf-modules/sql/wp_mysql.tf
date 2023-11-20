@@ -4,6 +4,10 @@ resource "google_sql_database_instance" "wp_mysql_instance" {
   database_version = "MYSQL_8_0"
   settings {
     tier = "db-f1-micro"
+    ip_configuration {
+      ipv4_enabled    = true
+      private_network = var.network.self_link
+    }
   }
 
   deletion_protection  = "false"

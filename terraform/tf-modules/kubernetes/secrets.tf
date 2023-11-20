@@ -11,6 +11,19 @@ resource "kubernetes_secret" "wp_registry_sa_secret" {
   type = "kubernetes.io/dockerconfigjson"
 }
 
+resource "kubernetes_secret" "aspnet_registry_sa_secret" {
+  metadata {
+    name      = "registry-sa"
+    namespace = var.aspnet_namespace
+  }
+
+  data = {
+    ".dockerconfigjson" = var.registry_sa_secret_data
+  }
+
+  type = "kubernetes.io/dockerconfigjson"
+}
+
 // mysql secret
 resource "kubernetes_secret" "wp_mysql_secret" {
   metadata {

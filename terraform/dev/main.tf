@@ -11,10 +11,10 @@ data "google_secret_manager_secret_version" "mysql_db_name" {
  secret   = "projects/440219679769/secrets/mysql_db_name"
 }
 data "google_secret_manager_secret_version" "mysql_db_username" {
- secret   = "projects/440219679769/secrets/mysql_db_password"
+ secret   = "projects/440219679769/secrets/mysql_db_username"
 }
 data "google_secret_manager_secret_version" "mysql_db_password" {
- secret   = "projects/440219679769/secrets/mysql_db_username"
+ secret   = "projects/440219679769/secrets/mysql_db_password"
 }
 
 module "main_bucket" {
@@ -60,4 +60,7 @@ module "main_sql" {
     wp_mysql_db_name        = data.google_secret_manager_secret_version.mysql_db_name.secret_data
     wp_mysql_db_user        = data.google_secret_manager_secret_version.mysql_db_username.secret_data
     wp_mysql_db_password    = data.google_secret_manager_secret_version.mysql_db_password.secret_data
+
+    network     = module.main_vpc.network
+    subnetwork  = module.main_vpc.subnetwork
 }
