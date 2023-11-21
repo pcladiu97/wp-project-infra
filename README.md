@@ -93,6 +93,7 @@ wp-project-infra/
         ├── outputs.tf
         ├── vars.tf
         └── vpc.tf
+```
 
 ## Usage
 
