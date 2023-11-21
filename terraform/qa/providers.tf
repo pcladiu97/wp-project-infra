@@ -12,12 +12,12 @@ terraform {
   backend "gcs" {
     bucket      = "wp-project-qa-tf-state-bucket"
     prefix      = "terraform/infrastructure-state"
-    credentials = "files/wp-project-qa-fff4e8beed43.json"
+    credentials = "files/credentials/wp-project-qa-fff4e8beed43.json"
   }
 }
 
 provider "google" {
-    credentials = file("files/wp-project-qa-fff4e8beed43.json")
+    credentials = file("files/credentials/wp-project-qa-fff4e8beed43.json")
     project     = local.project_id
     zone        = local.project_zone
 }
