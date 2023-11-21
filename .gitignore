@@ -2,3 +2,4 @@
 *.tfstate
 *.tfstate.*
 *.terraform*
+**/files/wp-project-*.json
