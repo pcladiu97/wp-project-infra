@@ -95,15 +95,13 @@ wp-project-infra/
         └── vpc.tf
 
 ## Usage
-Usage
+
 To use this Terraform configuration, follow the steps outlined in the Getting Started section. Customize variables as needed for your WordPress project.
 
 ## Variables
-Variables
 
 example_variable: Description of the variable and its purpose.
 
 ## Outputs
-Outputs
 
 example_output: Description of the output and its significance.
