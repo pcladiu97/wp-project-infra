@@ -1,4 +1,4 @@
-name: Build
+name: Terraform code quality gate check (SonarQube)
 
 on:
   workflow_dispatch:
