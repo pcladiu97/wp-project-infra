@@ -3,4 +3,4 @@
 *.tfstate.*
 *.terraform*
 **/files/credentials/*
-sonar-project.properties
+*.properties

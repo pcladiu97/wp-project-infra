@@ -1,11 +1,11 @@
-name: Terraform code quality gate check (SonarQube)
+name: Quality gate check for TF code with SonarQube
 
 on:
   workflow_dispatch:
 
 jobs:
   build:
-    name: Build
+    name: Quality gate check for TF code
     runs-on: ubuntu-latest
     permissions: read-all
     steps:
