@@ -9,6 +9,12 @@ variable "wp_mysql_db_name" {}
 variable "wp_mysql_db_user" {}
 variable "wp_mysql_db_password" {}
 
+
+variable "sonarqube_postgres_db_host" {}
+variable "sonarqube_postgres_db_name" {}
+variable "sonarqube_postgres_db_user" {}
+variable "sonarqube_postgres_db_password" {}
+
 variable "registry_sa_secret_data" {}
 
 variable "wp_namespace" {
@@ -17,6 +23,10 @@ variable "wp_namespace" {
 
 variable "aspnet_namespace" {
     default = "aspnet"
+}
+
+variable "monitoring_namespace" {
+    default = "monitoring"
 }
 
 variable "network" {

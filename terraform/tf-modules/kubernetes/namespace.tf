@@ -17,3 +17,13 @@ resource "kubernetes_namespace" "aspnet-namespace" {
     name = var.aspnet_namespace
   }
 }
+
+resource "kubernetes_namespace" "monitoring-namespace" {
+  metadata {
+    annotations = {
+      name = "monitoring-namespace"
+    }
+
+    name = var.monitoring_namespace
+  }
+}
