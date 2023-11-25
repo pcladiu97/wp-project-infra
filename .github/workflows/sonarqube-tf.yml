@@ -1,6 +1,9 @@
 name: Quality gate check for TF code with SonarQube
 
 on:
+  push:
+    branches:
+      - main
   workflow_dispatch:
 
 jobs:

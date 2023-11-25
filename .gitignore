@@ -3,4 +3,3 @@
 *.tfstate.*
 *.terraform*
 **/files/credentials/*
-*.properties
