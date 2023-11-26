@@ -1,15 +1,4 @@
-variable project_name {
-    default = "wp-project-manage"
-}
-
-variable project_id {
-    default = "wp-project-manage"
-}
-
-variable project_zone {
-    default = "europe-west1-c"
-}
-
-variable project_region {
-    default = "europe-west1"
+variable "artifact_registry_names" {
+  type    = list(string)
+  default = ["aspnet-project-infra-registry", "aspnet-project-infra-registry"]
 }
