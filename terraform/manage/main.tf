@@ -1,23 +1,17 @@
-terraform {
-  required_providers {
-    google = {
-      source  = "hashicorp/google"
-      version = ">= 5.4.0"
-    }
-  }
-  required_version = ">= 1.6.3"
+module "main_bucket" {
+    source = "../tf-modules/bucket"
+
+    project_region        = local.project_region
+    tf_state_bucket_name  = "${local.project_id}-tf-state-bucket"
 }
 
-terraform {
-  backend "gcs" {
-    bucket      = "wp-project-manage-tf-state-bucket"
-    prefix      = "terraform/infrastructure-state"
-    credentials = "files/credentials/wp-project-manage-9cd31bcca03b.json"
-  }
-}
+module "main_registry" {
+    source = "../tf-modules/registry"
 
-provider "google" {
-  credentials = file("files/credentials/wp-project-manage-9cd31bcca03b.json")
-  project     = var.project_id
-  zone        = var.project_zone
+    project_name        = local.project_name
+    project_id          = local.project_id
+    project_zone        = local.project_zone
+    project_region      = local.project_region
+
+    repository_names    = ["aspnet-project-infra-registry", "wp-project-infra-registry"]
 }

@@ -9,6 +9,10 @@ resource "kubernetes_secret" "wp_registry_sa_secret" {
   }
 
   type = "kubernetes.io/dockerconfigjson"
+
+  depends_on = [
+    kubernetes_namespace.wp-namespace
+  ]
 }
 
 resource "kubernetes_secret" "aspnet_registry_sa_secret" {
@@ -22,6 +26,10 @@ resource "kubernetes_secret" "aspnet_registry_sa_secret" {
   }
 
   type = "kubernetes.io/dockerconfigjson"
+
+  depends_on = [
+    kubernetes_namespace.aspnet-namespace
+  ]
 }
 
 resource "kubernetes_secret" "monitoring_registry_sa_secret" {
@@ -35,6 +43,10 @@ resource "kubernetes_secret" "monitoring_registry_sa_secret" {
   }
 
   type = "kubernetes.io/dockerconfigjson"
+
+  depends_on = [
+    kubernetes_namespace.monitoring-namespace
+  ]
 }
 
 // mysql secret
@@ -52,6 +64,10 @@ resource "kubernetes_secret" "wp_mysql_secret" {
   }
 
   type = "Opaque"
+
+  depends_on = [
+    kubernetes_namespace.wp-namespace
+  ]
 }
 
 resource "kubernetes_secret" "sonarqube_postgres_secret" {
@@ -68,5 +84,9 @@ resource "kubernetes_secret" "sonarqube_postgres_secret" {
   }
 
   type = "Opaque"
+
+  depends_on = [
+    kubernetes_namespace.monitoring-namespace
+  ]
 }
 
