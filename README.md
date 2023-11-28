@@ -67,6 +67,13 @@ project_region: "europe-west1" -> The GCP region of the project
 gke_nodes_number: "1" -> Number of GKE nodes to deploy
 ```
 
+Variable Name    | Default Value   | Explanation  | 
+:----------------|:----------------|:------------ | 
+project_name|wp-project|Project name from GCP| 
+project_id|wp-project-404313|Project ID from GCP| 
+project_zone|europe-west1-c|The GCP zone of the project| 
+project_region|europe-west1|The GCP region of the project| 
+
 ## Folder Structure
 
 ```plaintext
