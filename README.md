@@ -1,21 +1,20 @@
-# WordPress Project Infrastructure with Terraform
+# Infrastructure with Terraform
 
-This Terraform project sets up the infrastructure for a WordPress project, including necessary GCP resources.
+This Terraform project sets up the infrastructure for a WordPress instance, a simple ASP.NET application and a SonarQube instance, including necessary GCP resources.
 
 ## Table of Contents
 
-- [WordPress Project Infrastructure with Terraform](#wordpress-project-infrastructure-with-terraform)
+- [Infrastructure with Terraform](#infrastructure-with-terraform)
   - [Description](#description)
   - [Prerequisites](#prerequisites)
   - [Getting Started](#getting-started)
-  - [Folder Structure](#folder-structure)
   - [Usage](#usage)
   - [Variables](#variables)
-  - [Outputs](#outputs)
+  - [Folder Structure](#folder-structure)
 
 ## Description
 
-This Terraform project automates the provisioning of GCP resources needed for a WordPress project. It includes the setup of networking, GKE cluster and MySQL database instance.
+This Terraform project automates the provisioning of GCP resources needed for this project. It includes the setup of networking, GKE clusters and two database instance(One MySQL and one PostgreSQL).
 
 ## Prerequisites
 
@@ -40,13 +39,32 @@ Before you begin, ensure you have the following prerequisites:
     terraform init
     ```
 
-3. Customize the `locals.tf` file with your desired configurations if you are working on dev/qa/production stages. If you have to work on "manage" stage, then you can customize `vars.tf`.
+3. Customize the `locals.tf` file with your desired configurations.
 
 4. Apply the Terraform configuration:
 
     ```bash
     terraform apply
     ```
+
+## Usage
+
+To use this Terraform configuration, follow the steps outlined in the Getting Started section. Customize variables as needed for your WordPress project.
+
+## Variables
+
+The following variables can be customized in the respective `locals.tf` file:
+
+```plaintext
+environment: "dev" #The environment where you would like to deploy the resources
+
+project_name: "wp-project" -> Project name from GCP
+project_id: "wp-project-404313" -> Project ID from GCP
+project_zone: "europe-west1-c" -> The GCP zone of the project
+project_region: "europe-west1" -> The GCP region of the project
+
+gke_nodes_number: "1" -> Number of GKE nodes to deploy
+```
 
 ## Folder Structure
 
@@ -87,6 +105,10 @@ wp-project-infra/
     │   ├── namespace.tf
     │   ├── secrets.tf
     │   └── vars.tf
+    ├── registry/
+    │   ├── registry.tf
+    │   ├── output.tf
+    │   └── vars.tf
     ├── sql/
     │   ├── vars.tf
     │   └── wp_mysql.tf
@@ -95,22 +117,3 @@ wp-project-infra/
         ├── vars.tf
         └── vpc.tf
 ```
-
-## Usage
-
-To use this Terraform configuration, follow the steps outlined in the Getting Started section. Customize variables as needed for your WordPress project.
-
-## Variables
-
-environment: "dev" #The environment where you would like to deploy the resources
-
-project_name: "wp-project" #Project name from GCP
-project_id: "wp-project-404313" #Project ID from GCP
-project_zone: "europe-west1-c" #The GCP zone of the project
-project_region: "europe-west1" #The GCP region of the project
-
-gke_nodes_number: "1" #Number of GKE nodes to deploy
-
-## Outputs
-
-example_output: Description of the output and its significance.
