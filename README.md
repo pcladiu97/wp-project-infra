@@ -49,7 +49,8 @@ Before you begin, ensure you have the following prerequisites:
 
 ## Usage
 
-To use this Terraform configuration, follow the steps outlined in the Getting Started section. Customize variables as needed for your WordPress project.
+To use this Terraform configuration, follow the steps outlined in the Getting Started section and customize variables as needed for your WordPress project.
+At each push on the `main` branch, a CI/CD pipeline will start which will initiate a SonarQube scan of the code and the results will be pushed to the SonarQube instance.
 
 ## Variables
 
