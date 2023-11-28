@@ -56,17 +56,6 @@ At each push on the `main` branch, a CI/CD pipeline will start which will initia
 
 The following variables can be customized in the respective `locals.tf` file:
 
-```plaintext
-environment: "dev" #The environment where you would like to deploy the resources
-
-project_name: "wp-project" -> Project name from GCP
-project_id: "wp-project-404313" -> Project ID from GCP
-project_zone: "europe-west1-c" -> The GCP zone of the project
-project_region: "europe-west1" -> The GCP region of the project
-
-gke_nodes_number: "1" -> Number of GKE nodes to deploy
-```
-
 Variable Name    | Default Value   | Explanation  | 
 :----------------|:----------------|:------------ | 
 project_name|wp-project|Project name from GCP| 
