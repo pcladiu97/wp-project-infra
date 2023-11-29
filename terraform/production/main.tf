@@ -18,16 +18,16 @@ data "google_secret_manager_secret_version" "mysql_db_password" {
 }
 
 data "google_secret_manager_secret_version" "sonarqube_postgres_db_host" {
- secret   = "projects/440219679769/secrets/sonarqube_postgres_db_host"
+ secret   = "projects/286193583764/secrets/sonarqube_postgres_db_host"
 }
 data "google_secret_manager_secret_version" "sonarqube_postgres_db_name" {
- secret   = "projects/440219679769/secrets/sonarqube_postgres_db_name"
+ secret   = "projects/286193583764/secrets/sonarqube_postgres_db_name"
 }
 data "google_secret_manager_secret_version" "sonarqube_postgres_db_username" {
- secret   = "projects/440219679769/secrets/sonarqube_postgres_db_username"
+ secret   = "projects/286193583764/secrets/sonarqube_postgres_db_username"
 }
 data "google_secret_manager_secret_version" "sonarqube_postgres_db_password" {
- secret   = "projects/440219679769/secrets/sonarqube_postgres_db_password"
+ secret   = "projects/286193583764/secrets/sonarqube_postgres_db_password"
 }
 
 module "main_bucket" {
